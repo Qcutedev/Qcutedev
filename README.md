@@ -24,5 +24,16 @@
 </p>
 
 <p align="center">
+  <img src="assets/snake-title.svg" width="100%" alt="./snake --eat ~/contributions">
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Qcutedev/Qcutedev/output/snake-dark.svg">
+    <img src="https://raw.githubusercontent.com/Qcutedev/Qcutedev/output/snake-light.svg" width="100%" alt="A snake eating the GitHub contribution grid">
+  </picture>
+</p>
+
+<p align="center">
   <img src="assets/footer.svg" width="100%" alt="exit 0. Thanks for visiting.">
 </p>

@@ -402,6 +402,7 @@ files = {
     "about.svg": about(),
     "skills.svg": skills(),
     "projects.svg": strip("ls ~/projects", "ls ~/projects"),
+    "snake-title.svg": strip("./snake --eat ~/contributions", "./snake --eat ~/contributions"),
     "footer.svg": footer(),
 }
 for slug, repo, title, lang, accent, lines, tags in CARDS:
