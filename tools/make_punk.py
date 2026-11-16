@@ -1,8 +1,11 @@
 """Generate the 'Cyberpunk Terminal' SVG assets for the GitHub profile README.
 
-usage: python make_punk.py <fonts-dir> <out-assets-dir>
+usage: python make_punk.py <fonts-dir> <out-assets-dir>      (needs: pip install fonttools)
 Embeds ASCII subsets of Press Start 2P and JetBrains Mono (SIL OFL 1.1) as WOFF data URIs.
 Subsets are renamed (QcPixel / QcMono) because Press Start 2P has a Reserved Font Name.
+Licenses: ../licenses/. The fonts are not stored in this repo; put these files in <fonts-dir>:
+  pixel.ttf <- https://raw.githubusercontent.com/google/fonts/main/ofl/pressstart2p/PressStart2P-Regular.ttf
+  mono.ttf  <- https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf
 """
 import base64
 import io
