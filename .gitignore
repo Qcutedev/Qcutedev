@@ -1,0 +1,3 @@
+# local preview output (python tools/make_stats.py <fonts> .preview)
+.preview/
+__pycache__/
