@@ -329,8 +329,8 @@ def hero(m: bool) -> str:
         for i in range(1, 6)) + "\n    " + "\n    ".join(part_css)
     label = ("QCUTEDEV: student dev, AI enjoyer, future full-time dev. Status: shipping ML into real apps. "
              "Splash text: Now with ML! A night-time pixel block world with a far-off neon city and a cyan light beam; "
-             "a pixel dev in a purple hoodie mines a diamond ore block that drops his skills one by one (python, java, docker...) "
-             "while a creeper sneaks up behind him, hisses and poofs into smoke, above a game hotbar.")
+             "a pixel dev in a purple hoodie mines a diamond ore block that drops the skills one by one (python, java, docker...) "
+             "while a creeper sneaks up from behind, hisses and poofs into smoke, above a game hotbar.")
     return svg(w, h, label, body, css)
 
 
