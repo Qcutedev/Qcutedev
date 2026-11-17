@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profile Preview</title>
+<!--
+  Local preview of README.md (same markup, local asset paths). Open this file in a browser.
+  Toolbar: device width (Desktop / Tablet 768 / Mobile 390, rendered in an iframe so the
+  <picture media> swaps happen exactly as on GitHub) and page theme (GitHub dark / light).
+  Live images: stats load from .preview/ first (make them with
+    GH_TOKEN=$(gh auth token) python tools/make_stats.py <fonts-dir> .preview Qcutedev),
+  then from the published `output` branch, then fall back to a text box.
+  Keep the markup inside <article> in sync with README.md.
+-->
+<style>
+  :root { --bg: #0d1117; --line: #30363d; --fg: #e6edf3; --muted: #9198a1; --accent: #3EE6EE; }
+  :root[data-theme="light"] { --bg: #ffffff; --line: #d1d9e0; --fg: #1f2328; --muted: #59636e; --accent: #1B7F8A; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) { --bg: #ffffff; --line: #d1d9e0; --fg: #1f2328; --muted: #59636e; --accent: #1B7F8A; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; overflow-x: hidden; }
+  .bar { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center;
+         padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--bg); }
+  .bar strong { font-weight: 600; margin-right: 4px; }
+  .group { display: flex; gap: 6px; align-items: center; }
+  .group span { color: var(--muted); }
+  .bar button { font: inherit; padding: 3px 10px; border: 1px solid var(--line); border-radius: 6px;
+                background: transparent; color: var(--fg); cursor: pointer; transition: border-color .15s ease, color .15s ease; }
+  .bar button:hover { border-color: var(--muted); }
+  .bar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .stage { display: flex; justify-content: center; padding: 16px; }
+  .stage iframe { width: 100%; height: calc(100vh - 90px); border: 1px solid var(--line); border-radius: 8px;
+                  background: var(--bg); transition: width .2s ease; }
+  /* GitHub-like README box */
+  .readme { max-width: 896px; margin: 24px auto; padding: 24px; border: 1px solid var(--line); border-radius: 6px; }
+  .readme p { margin: 0 0 16px; }
+  .readme img { max-width: 100%; vertical-align: middle; }
+  .readme a { color: inherit; }
+  .fallback { padding: 16px; border: 1px dashed var(--line); border-radius: 6px; color: var(--muted); text-align: center; }
+  @media (max-width: 767px) { .readme { margin: 0; padding: 16px; border: 0; border-radius: 0; } }
+</style>
+<script>
+  const q = new URLSearchParams(location.search);
+  if (q.get("theme")) document.documentElement.dataset.theme = q.get("theme");
+  // live images: .preview/ -> published output branch -> text fallback
+  function liveFail(img) {
+    const pic = img.closest("picture");
+    if (img.dataset.stage !== "remote") {
+      img.dataset.stage = "remote";
+      pic.querySelectorAll("source").forEach((s) => { s.srcset = s.dataset.remote; });
+      img.src = img.dataset.remote;
+      return;
+    }
+    img.onerror = null;
+    const box = document.createElement("div");
+    box.className = "fallback";
+    box.textContent = img.alt + " (not generated yet: run tools/make_stats.py, or wait for the daily workflow)";
+    pic.replaceWith(box);
+  }
+</script>
+</head>
+<body>
+<div class="bar" id="bar">
+  <strong>Profile preview</strong>
+  <div class="group" role="group" aria-label="Device"><span>Device</span>
+    <button data-w="100%" aria-pressed="true">Desktop</button><button data-w="768px">Tablet</button><button data-w="390px">Mobile</button>
+  </div>
+  <div class="group" role="group" aria-label="Theme"><span>Page</span>
+    <button data-t="dark" aria-pressed="true">Dark</button><button data-t="light">Light</button>
+  </div>
+</div>
+<div class="stage" id="stage"><iframe id="frame" title="README preview"></iframe></div>
+
+<article class="readme" id="readme">
+<p align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset="assets/banner-m.svg">
+    <img src="assets/banner.svg" width="100%" alt="QCUTEDEV: student dev // AI enjoyer // future full-time dev. Status: shipping ML into real apps.">
+  </picture>
+</p>
+
+<br>
+
+<p align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset="assets/about-m.svg">
+    <img src="assets/about.svg" width="100%" alt="Player terminal">
+  </picture>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset="assets/skills-m.svg">
+    <img src="assets/skills.svg" width="100%" alt="Inventory of skills">
+  </picture>
+</p>
+
+<br>
+
+<p align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset="assets/projects-m.svg">
+    <img src="assets/projects.svg" width="100%" alt="Projects">
+  </picture>
+</p>
+<p align="center">
+  <a href="https://github.com/Qcutedev/rideros-ai">
+    <picture>
+      <source media="(max-width: 640px)" srcset="assets/card-rideros-m.svg">
+      <img src="assets/card-rideros.svg" width="100%" alt="RiderOS AI">
+    </picture>
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/Qcutedev/Project-Sleep">
+    <picture>
+      <source media="(max-width: 640px)" srcset="assets/card-sleepwise-m.svg">
+      <img src="assets/card-sleepwise.svg" width="100%" alt="SleepWise AI">
+    </picture>
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/Qcutedev/web-shopping">
+    <picture>
+      <source media="(max-width: 640px)" srcset="assets/card-marketplace-m.svg">
+      <img src="assets/card-marketplace.svg" width="100%" alt="Thai Marketplace">
+    </picture>
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/Qcutedev/ml-deployment-lab">
+    <picture>
+      <source media="(max-width: 640px)" srcset="assets/card-mllab-m.svg">
+      <img src="assets/card-mllab.svg" width="100%" alt="ML Deploy Lab">
+    </picture>
+  </a>
+</p>
+
+<br>
+
+<p align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset=".preview/stats-m.svg" data-remote="https://raw.githubusercontent.com/Qcutedev/Qcutedev/output/stats-m.svg">
+    <img src=".preview/stats.svg" data-remote="https://raw.githubusercontent.com/Qcutedev/Qcutedev/output/stats.svg" onerror="liveFail(this)" width="100%" alt="Player stats (live GitHub data)">
+  </picture>
+</p>
+
+<br>
+
+<p align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset="assets/snake-title-m.svg">
+    <img src="assets/snake-title.svg" width="100%" alt="World map">
+  </picture>
+</p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Qcutedev/Qcutedev/output/snake-dark.svg" data-remote="https://raw.githubusercontent.com/Qcutedev/Qcutedev/output/snake-dark.svg">
+    <img src="https://raw.githubusercontent.com/Qcutedev/Qcutedev/output/snake-light.svg" data-stage="remote" onerror="liveFail(this)" width="100%" alt="Contribution snake (live)">
+  </picture>
+</p>
+
+<br>
+
+<p align="center">
+  <picture>
+    <source media="(max-width: 640px)" srcset="assets/footer-m.svg">
+    <img src="assets/footer.svg" width="100%" alt="Thanks 4 visiting!">
+  </picture>
+</p>
+</article>
+
+<script>
+  const bar = document.getElementById("bar"), stage = document.getElementById("stage");
+  const readme = document.getElementById("readme"), frame = document.getElementById("frame");
+  if (q.has("frame") || window.self !== window.top) {
+    bar.remove();
+    stage.remove();
+  } else {
+    readme.remove();
+    let theme = "dark";
+    const load = () => { frame.src = "preview.html?frame&theme=" + theme; document.documentElement.dataset.theme = theme; };
+    const pick = (sel, fn) => bar.querySelectorAll(sel).forEach((b) => b.addEventListener("click", () => {
+      bar.querySelectorAll(sel).forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+      fn(b);
+    }));
+    pick("[data-w]", (b) => { frame.style.width = b.dataset.w; });
+    pick("[data-t]", (b) => { theme = b.dataset.t; load(); });
+    // ?device=390 / 768 preselects a width (handy for screenshots)
+    const dev = bar.querySelector(`[data-w="${q.get("device")}px"]`);
+    if (dev) dev.click();
+    load();
+  }
+</script>
+</body>
+</html>
